@@ -8,7 +8,7 @@ namespace NutriPlan_Zdornikova.Models
     public partial class NutriPlanDB : DbContext
     {
         public NutriPlanDB()
-            : base("name=NutriPlanDB1")
+            : base("name=NutriPlanDB2")
         {
         }
 

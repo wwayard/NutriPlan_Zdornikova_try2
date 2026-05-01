@@ -36,8 +36,8 @@ namespace NutriPlan_Zdornikova.Models
 
         public int IdActivityLevel { get; set; }
 
-        [Column(TypeName = "image")]
-        public byte[] photo { get; set; }
+        [StringLength(255)]
+        public string PhotoPath { get; set; }
 
         public virtual ActivityLevel ActivityLevel { get; set; }
 

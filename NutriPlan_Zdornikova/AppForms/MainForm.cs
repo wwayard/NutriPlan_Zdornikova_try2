@@ -30,30 +30,41 @@ namespace NutriPlan_Zdornikova.AppForms
 
         private void LoadUserProfile()
         {
-            if (Session.CurrentUser?.UserProfiles?.photo == null ||
-        Session.CurrentUser.UserProfiles.photo.Length == 0)
-                return;
+            if (Session.CurrentUser?.UserProfiles?.PhotoPath == null ||
+        string.IsNullOrEmpty(Session.CurrentUser.UserProfiles.PhotoPath))
+            {
+                return; // Нет фото — выходим
+            }
 
             try
             {
-                using (MemoryStream ms = new MemoryStream(Session.CurrentUser.UserProfiles.photo))
+                // Собираем полный путь к файлу
+                string photosFolder = Path.Combine(Application.StartupPath, "UserPhotos");
+                string fullPath = Path.Combine(photosFolder, Session.CurrentUser.UserProfiles.PhotoPath);
+
+                // Проверяем, существует ли файл
+                if (!File.Exists(fullPath))
                 {
-                    PictureBoxPhotoPath.Image = Image.FromStream(ms);
-                    PictureBoxPhotoPath.SizeMode = PictureBoxSizeMode.StretchImage;
+                    MessageBox.Show($"Файл не найден: {fullPath}", "Предупреждение");
+                    return;
                 }
+
+                // Загружаем изображение из файла
+                PictureBoxAVATAR.Image = Image.FromFile(fullPath);
+                PictureBoxAVATAR.SizeMode = PictureBoxSizeMode.StretchImage;
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Ошибка загрузки фото: {ex.Message}");
+                MessageBox.Show($"Ошибка загрузки фото: {ex.Message}", "Ошибка");
             }
 
         }
-       
+
         private void CalculateIMT(int weight, int heightCm)
         {
             double heightM = heightCm / 100.0;
             double imt = weight / (heightM * heightM);
-           
+
         }
 
 
@@ -75,14 +86,14 @@ namespace NutriPlan_Zdornikova.AppForms
 
             var profile = Session.CurrentUser.UserProfiles;
             labelUser.Text = Session.CurrentUser.FullName;
-            guna2TextBoxWeight.Text = $"{profile.weightCM} кг";
+            TextBoxWeight.Text = $"{profile.weightCM} кг";
             TextBoxHeight.Text = $"{profile.heightCM} см";
             labelGender.Text = profile.IdGender == 1 ? "Мужской" : "Женский";
             ComboBoxGoal.SelectedValue = profile.idGoal; // Метод для преобразования ID цели в текст
             ComboBoxActivity.SelectedValue = profile.IdActivityLevel; // Аналогично для активности
             labelAge.Text = $"{profile.DateOfBirthday}";
 
-            double heightInMeters = profile.heightCM/ 100.0;
+            double heightInMeters = profile.heightCM / 100.0;
             double bmi = profile.weightCM / (heightInMeters * heightInMeters);
 
             if (bmi < 18.5)
@@ -107,11 +118,11 @@ namespace NutriPlan_Zdornikova.AppForms
             // Можно рассчитать ИМТ, БЖУ и т.д.
             CalculateIMT((int)profile.weightCM, profile.heightCM);
 
-         
+
             labelIMT.Text = bmi.ToString("F1");
 
         }
-        
+
 
         private void PictureBoxPhotoPath_Click(object sender, EventArgs e)
         {
@@ -158,8 +169,8 @@ namespace NutriPlan_Zdornikova.AppForms
                         SavePhotoToDatabase(uniqueFileName);
 
                         // 4. Показываем фото в PictureBox сразу же (берем из нашей папки)
-                        PictureBoxPhotoPath.Image = Image.FromFile(destinationFilePath);
-                        PictureBoxPhotoPath.SizeMode = PictureBoxSizeMode.StretchImage;
+                        PictureBoxAVATAR.Image = Image.FromFile(destinationFilePath);
+                        PictureBoxAVATAR.SizeMode = PictureBoxSizeMode.StretchImage;
 
                         MessageBox.Show("Аватарка успешно обновлена!", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
@@ -180,7 +191,7 @@ namespace NutriPlan_Zdornikova.AppForms
                 {
                     // ВАЖНО: Убедитесь, что поле в БД называется PhotoPath (или как у вас)
                     // И что оно типа NVARCHAR (строка), а не VARBINARY (байты).
-                    profile.photo = photoFileName;
+                    profile.PhotoPath = photoFileName;
 
                     context.SaveChanges();
 
@@ -190,4 +201,89 @@ namespace NutriPlan_Zdornikova.AppForms
             }
 
         }
-}
+
+        private void splitContainer1_Panel2_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void PictureBoxChange_Click(object sender, EventArgs e)
+        {
+            TextBoxHeight.Enabled = true;
+            TextBoxWeight.Enabled = true;
+            ComboBoxGoal.Enabled = true;
+            ComboBoxActivity.Enabled = true;
+
+            PictureBoxChange.Visible = false;
+            ButtonSave.Visible = true;
+            MessageBox.Show("Режим редактирования активирован. Измените данные и нажмите 'Сохранить'.",
+                   "Редактирование", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void ButtonSave_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                // Простая валидация
+                if (string.IsNullOrWhiteSpace(TextBoxWeight.Text) ||
+                    string.IsNullOrWhiteSpace(TextBoxHeight.Text))
+                {
+                    MessageBox.Show("Заполните вес и рост!");
+                    return;
+                }
+
+                using (var context = new NutriPlanDB())
+                {
+                    // Находим профиль текущего пользователя
+                    var profile = context.UserProfiles.Find(Session.CurrentUser.Id);
+
+                    if (profile != null)
+                    {
+                        // Обновляем данные из полей формы
+                        // Парсим текст в числа
+                        profile.weightCM = int.Parse(TextBoxWeight.Text.Replace(" кг", "")); // Удаляем " кг" если оно есть в тексте
+                        profile.heightCM = int.Parse(TextBoxHeight.Text.Replace(" см", ""));     // Удаляем " см" если оно есть
+
+                        // Для комбобоксов берем SelectedValue (ID)
+                        if (ComboBoxGoal.SelectedValue != null)
+                            profile.idGoal = (int)ComboBoxGoal.SelectedValue;
+
+                        if (ComboBoxActivity.SelectedValue != null)
+                            profile.IdActivityLevel = (int)ComboBoxActivity.SelectedValue;
+
+                        // Сохраняем в БД
+                        context.SaveChanges();
+
+                        // Обновляем сессию, чтобы данные были актуальны везде
+                        Session.CurrentUser.UserProfiles = profile;
+
+                        MessageBox.Show("Данные успешно обновлены!", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                        // 3. Возвращаемся в режим просмотра
+                        ExitEditMode();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка сохранения: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        // Вспомогательный метод для выхода из режима редактирования
+        private void ExitEditMode()
+        {
+            // Блокируем поля
+            TextBoxWeight.Enabled = false;
+            TextBoxHeight.Enabled = false;
+            ComboBoxGoal.Enabled = false;
+            ComboBoxActivity.Enabled = false;
+
+            // Возвращаем иконки
+            PictureBoxChange.Visible = true;       // Показываем карандаш
+            ButtonSave.Visible = false;   // Скрываем кнопку сохранить
+        }
+    }
+    }
+    
+

@@ -645,6 +645,7 @@
             this.guna2Button1.Size = new System.Drawing.Size(201, 37);
             this.guna2Button1.TabIndex = 20;
             this.guna2Button1.Text = "Назад";
+            this.guna2Button1.Click += new System.EventHandler(this.guna2Button1_Click);
             // 
             // ButtonFinish
             // 

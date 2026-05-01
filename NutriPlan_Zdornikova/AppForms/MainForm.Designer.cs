@@ -41,9 +41,9 @@
             this.guna2Button2 = new Guna.UI2.WinForms.Guna2Button();
             this.guna2Button1 = new Guna.UI2.WinForms.Guna2Button();
             this.PictureBoxPhotoPath = new Guna.UI2.WinForms.Guna2PictureBox();
-            this.guna2CirclePictureBox2 = new Guna.UI2.WinForms.Guna2CirclePictureBox();
+            this.PictureBoxAVATAR = new Guna.UI2.WinForms.Guna2CirclePictureBox();
             this.guna2Panel5 = new Guna.UI2.WinForms.Guna2Panel();
-            this.guna2PictureBox3 = new Guna.UI2.WinForms.Guna2PictureBox();
+            this.PictureBoxChange = new Guna.UI2.WinForms.Guna2PictureBox();
             this.labelIMTSTATUS = new System.Windows.Forms.Label();
             this.labelIMT = new System.Windows.Forms.Label();
             this.ComboBoxActivity = new Guna.UI2.WinForms.Guna2ComboBox();
@@ -52,7 +52,7 @@
             this.ComboBoxGoal = new Guna.UI2.WinForms.Guna2ComboBox();
             this.goalBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.TextBoxHeight = new Guna.UI2.WinForms.Guna2TextBox();
-            this.guna2TextBoxWeight = new Guna.UI2.WinForms.Guna2TextBox();
+            this.TextBoxWeight = new Guna.UI2.WinForms.Guna2TextBox();
             this.guna2Panel6 = new Guna.UI2.WinForms.Guna2Panel();
             this.label4 = new System.Windows.Forms.Label();
             this.guna2Panel9 = new Guna.UI2.WinForms.Guna2Panel();
@@ -73,6 +73,7 @@
             this.labelGender = new System.Windows.Forms.Label();
             this.goalTableAdapter = new NutriPlan_Zdornikova.NutriPlan_ZdornikovaDataSetTableAdapters.GoalTableAdapter();
             this.activityLevelTableAdapter = new NutriPlan_Zdornikova.NutriPlan_ZdornikovaDataSetTableAdapters.ActivityLevelTableAdapter();
+            this.ButtonSave = new Guna.UI2.WinForms.Guna2Button();
             ((System.ComponentModel.ISupportInitialize)(this.nutriPlan_ZdornikovaDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.usersBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -80,9 +81,9 @@
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PictureBoxPhotoPath)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.guna2CirclePictureBox2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PictureBoxAVATAR)).BeginInit();
             this.guna2Panel5.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PictureBoxChange)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.activityLevelBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.goalBindingSource)).BeginInit();
             this.guna2Panel6.SuspendLayout();
@@ -157,9 +158,10 @@
             this.splitContainer1.Panel2.Controls.Add(this.guna2Button2);
             this.splitContainer1.Panel2.Controls.Add(this.guna2Button1);
             this.splitContainer1.Panel2.Controls.Add(this.PictureBoxPhotoPath);
-            this.splitContainer1.Panel2.Controls.Add(this.guna2CirclePictureBox2);
+            this.splitContainer1.Panel2.Controls.Add(this.PictureBoxAVATAR);
             this.splitContainer1.Panel2.Controls.Add(this.guna2Panel5);
             this.splitContainer1.Panel2.Controls.Add(this.PanelGlobalInfo);
+            this.splitContainer1.Panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.splitContainer1_Panel2_Paint);
             this.splitContainer1.Size = new System.Drawing.Size(1339, 593);
             this.splitContainer1.SplitterDistance = 76;
             this.splitContainer1.TabIndex = 1;
@@ -218,39 +220,41 @@
             // 
             // PictureBoxPhotoPath
             // 
-            this.PictureBoxPhotoPath.Image = global::NutriPlan_Zdornikova.Properties.Resources.images__2_;
+            this.PictureBoxPhotoPath.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.PictureBoxPhotoPath.Image = global::NutriPlan_Zdornikova.Properties.Resources._85423;
             this.PictureBoxPhotoPath.ImageRotate = 0F;
-            this.PictureBoxPhotoPath.Location = new System.Drawing.Point(135, 31);
+            this.PictureBoxPhotoPath.Location = new System.Drawing.Point(90, 7);
             this.PictureBoxPhotoPath.Name = "PictureBoxPhotoPath";
-            this.PictureBoxPhotoPath.Size = new System.Drawing.Size(49, 35);
+            this.PictureBoxPhotoPath.Size = new System.Drawing.Size(40, 40);
             this.PictureBoxPhotoPath.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.PictureBoxPhotoPath.TabIndex = 12;
             this.PictureBoxPhotoPath.TabStop = false;
             this.PictureBoxPhotoPath.Click += new System.EventHandler(this.PictureBoxPhotoPath_Click);
             // 
-            // guna2CirclePictureBox2
+            // PictureBoxAVATAR
             // 
-            this.guna2CirclePictureBox2.ImageRotate = 0F;
-            this.guna2CirclePictureBox2.Location = new System.Drawing.Point(40, 31);
-            this.guna2CirclePictureBox2.Name = "guna2CirclePictureBox2";
-            this.guna2CirclePictureBox2.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
-            this.guna2CirclePictureBox2.Size = new System.Drawing.Size(136, 134);
-            this.guna2CirclePictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.guna2CirclePictureBox2.TabIndex = 13;
-            this.guna2CirclePictureBox2.TabStop = false;
+            this.PictureBoxAVATAR.ImageRotate = 0F;
+            this.PictureBoxAVATAR.Location = new System.Drawing.Point(40, 47);
+            this.PictureBoxAVATAR.Name = "PictureBoxAVATAR";
+            this.PictureBoxAVATAR.ShadowDecoration.Mode = Guna.UI2.WinForms.Enums.ShadowMode.Circle;
+            this.PictureBoxAVATAR.Size = new System.Drawing.Size(136, 134);
+            this.PictureBoxAVATAR.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.PictureBoxAVATAR.TabIndex = 13;
+            this.PictureBoxAVATAR.TabStop = false;
             // 
             // guna2Panel5
             // 
             this.guna2Panel5.BackColor = System.Drawing.Color.Transparent;
             this.guna2Panel5.BorderRadius = 20;
-            this.guna2Panel5.Controls.Add(this.guna2PictureBox3);
+            this.guna2Panel5.Controls.Add(this.ButtonSave);
+            this.guna2Panel5.Controls.Add(this.PictureBoxChange);
             this.guna2Panel5.Controls.Add(this.labelIMTSTATUS);
             this.guna2Panel5.Controls.Add(this.labelIMT);
             this.guna2Panel5.Controls.Add(this.ComboBoxActivity);
             this.guna2Panel5.Controls.Add(this.ProgressBarIMT);
             this.guna2Panel5.Controls.Add(this.ComboBoxGoal);
             this.guna2Panel5.Controls.Add(this.TextBoxHeight);
-            this.guna2Panel5.Controls.Add(this.guna2TextBoxWeight);
+            this.guna2Panel5.Controls.Add(this.TextBoxWeight);
             this.guna2Panel5.Controls.Add(this.guna2Panel6);
             this.guna2Panel5.Controls.Add(this.guna2Panel9);
             this.guna2Panel5.Controls.Add(this.guna2Panel7);
@@ -261,16 +265,18 @@
             this.guna2Panel5.Size = new System.Drawing.Size(773, 399);
             this.guna2Panel5.TabIndex = 9;
             // 
-            // guna2PictureBox3
+            // PictureBoxChange
             // 
-            this.guna2PictureBox3.Image = global::NutriPlan_Zdornikova.Properties.Resources._4277132;
-            this.guna2PictureBox3.ImageRotate = 0F;
-            this.guna2PictureBox3.Location = new System.Drawing.Point(725, 353);
-            this.guna2PictureBox3.Name = "guna2PictureBox3";
-            this.guna2PictureBox3.Size = new System.Drawing.Size(30, 30);
-            this.guna2PictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.guna2PictureBox3.TabIndex = 13;
-            this.guna2PictureBox3.TabStop = false;
+            this.PictureBoxChange.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.PictureBoxChange.Image = global::NutriPlan_Zdornikova.Properties.Resources._4277132;
+            this.PictureBoxChange.ImageRotate = 0F;
+            this.PictureBoxChange.Location = new System.Drawing.Point(721, 362);
+            this.PictureBoxChange.Name = "PictureBoxChange";
+            this.PictureBoxChange.Size = new System.Drawing.Size(30, 30);
+            this.PictureBoxChange.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.PictureBoxChange.TabIndex = 13;
+            this.PictureBoxChange.TabStop = false;
+            this.PictureBoxChange.Click += new System.EventHandler(this.PictureBoxChange_Click);
             // 
             // labelIMTSTATUS
             // 
@@ -304,7 +310,7 @@
             this.ComboBoxActivity.Enabled = false;
             this.ComboBoxActivity.FocusedColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.ComboBoxActivity.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.ComboBoxActivity.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.ComboBoxActivity.Font = new System.Drawing.Font("Candara", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.ComboBoxActivity.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(88)))), ((int)(((byte)(112)))));
             this.ComboBoxActivity.ItemHeight = 30;
             this.ComboBoxActivity.Location = new System.Drawing.Point(178, 178);
@@ -343,7 +349,7 @@
             this.ComboBoxGoal.Enabled = false;
             this.ComboBoxGoal.FocusedColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.ComboBoxGoal.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.ComboBoxGoal.Font = new System.Drawing.Font("Segoe UI", 10F);
+            this.ComboBoxGoal.Font = new System.Drawing.Font("Candara", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.ComboBoxGoal.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(68)))), ((int)(((byte)(88)))), ((int)(((byte)(112)))));
             this.ComboBoxGoal.ItemHeight = 30;
             this.ComboBoxGoal.Location = new System.Drawing.Point(178, 126);
@@ -368,36 +374,40 @@
             this.TextBoxHeight.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
             this.TextBoxHeight.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
             this.TextBoxHeight.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.TextBoxHeight.Enabled = false;
             this.TextBoxHeight.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.TextBoxHeight.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.TextBoxHeight.Font = new System.Drawing.Font("Candara", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.TextBoxHeight.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.TextBoxHeight.Location = new System.Drawing.Point(178, 72);
             this.TextBoxHeight.Name = "TextBoxHeight";
+            this.TextBoxHeight.PlaceholderForeColor = System.Drawing.Color.White;
             this.TextBoxHeight.PlaceholderText = "";
             this.TextBoxHeight.SelectedText = "";
             this.TextBoxHeight.Size = new System.Drawing.Size(376, 28);
             this.TextBoxHeight.TabIndex = 10;
             // 
-            // guna2TextBoxWeight
+            // TextBoxWeight
             // 
-            this.guna2TextBoxWeight.Animated = true;
-            this.guna2TextBoxWeight.AutoRoundedCorners = true;
-            this.guna2TextBoxWeight.BorderRadius = 13;
-            this.guna2TextBoxWeight.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.guna2TextBoxWeight.DefaultText = "";
-            this.guna2TextBoxWeight.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
-            this.guna2TextBoxWeight.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
-            this.guna2TextBoxWeight.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.guna2TextBoxWeight.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
-            this.guna2TextBoxWeight.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.guna2TextBoxWeight.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.guna2TextBoxWeight.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.guna2TextBoxWeight.Location = new System.Drawing.Point(178, 18);
-            this.guna2TextBoxWeight.Name = "guna2TextBoxWeight";
-            this.guna2TextBoxWeight.PlaceholderText = "";
-            this.guna2TextBoxWeight.SelectedText = "";
-            this.guna2TextBoxWeight.Size = new System.Drawing.Size(379, 28);
-            this.guna2TextBoxWeight.TabIndex = 9;
+            this.TextBoxWeight.Animated = true;
+            this.TextBoxWeight.AutoRoundedCorners = true;
+            this.TextBoxWeight.BorderRadius = 13;
+            this.TextBoxWeight.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.TextBoxWeight.DefaultText = "";
+            this.TextBoxWeight.DisabledState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(208)))), ((int)(((byte)(208)))), ((int)(((byte)(208)))));
+            this.TextBoxWeight.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(226)))), ((int)(((byte)(226)))), ((int)(((byte)(226)))));
+            this.TextBoxWeight.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.TextBoxWeight.DisabledState.PlaceholderForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(138)))), ((int)(((byte)(138)))), ((int)(((byte)(138)))));
+            this.TextBoxWeight.Enabled = false;
+            this.TextBoxWeight.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.TextBoxWeight.Font = new System.Drawing.Font("Candara", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.TextBoxWeight.HoverState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.TextBoxWeight.Location = new System.Drawing.Point(178, 18);
+            this.TextBoxWeight.Name = "TextBoxWeight";
+            this.TextBoxWeight.PlaceholderForeColor = System.Drawing.Color.White;
+            this.TextBoxWeight.PlaceholderText = "";
+            this.TextBoxWeight.SelectedText = "";
+            this.TextBoxWeight.Size = new System.Drawing.Size(379, 28);
+            this.TextBoxWeight.TabIndex = 9;
             // 
             // guna2Panel6
             // 
@@ -499,7 +509,7 @@
             this.PanelGlobalInfo.Controls.Add(this.labelAge);
             this.PanelGlobalInfo.Controls.Add(this.labelGender);
             this.PanelGlobalInfo.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.PanelGlobalInfo.Location = new System.Drawing.Point(12, 180);
+            this.PanelGlobalInfo.Location = new System.Drawing.Point(12, 191);
             this.PanelGlobalInfo.Name = "PanelGlobalInfo";
             this.PanelGlobalInfo.Size = new System.Drawing.Size(210, 244);
             this.PanelGlobalInfo.TabIndex = 0;
@@ -606,6 +616,27 @@
             // 
             this.activityLevelTableAdapter.ClearBeforeFill = true;
             // 
+            // ButtonSave
+            // 
+            this.ButtonSave.Animated = true;
+            this.ButtonSave.AutoRoundedCorners = true;
+            this.ButtonSave.DefaultAutoSize = true;
+            this.ButtonSave.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.ButtonSave.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.ButtonSave.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.ButtonSave.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.ButtonSave.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(128)))), ((int)(((byte)(128)))), ((int)(((byte)(255)))));
+            this.ButtonSave.Font = new System.Drawing.Font("Candara", 12F);
+            this.ButtonSave.ForeColor = System.Drawing.Color.White;
+            this.ButtonSave.IndicateFocus = true;
+            this.ButtonSave.Location = new System.Drawing.Point(581, 361);
+            this.ButtonSave.Name = "ButtonSave";
+            this.ButtonSave.Size = new System.Drawing.Size(107, 31);
+            this.ButtonSave.TabIndex = 14;
+            this.ButtonSave.Text = "Сохранить ";
+            this.ButtonSave.Visible = false;
+            this.ButtonSave.Click += new System.EventHandler(this.ButtonSave_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -624,10 +655,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.PictureBoxPhotoPath)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.guna2CirclePictureBox2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PictureBoxAVATAR)).EndInit();
             this.guna2Panel5.ResumeLayout(false);
             this.guna2Panel5.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PictureBoxChange)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.activityLevelBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.goalBindingSource)).EndInit();
             this.guna2Panel6.ResumeLayout(false);
@@ -678,7 +709,7 @@
         private System.Windows.Forms.Label label15;
         private Guna.UI2.WinForms.Guna2Panel guna2Panel4;
         private System.Windows.Forms.Label label14;
-        private Guna.UI2.WinForms.Guna2TextBox guna2TextBoxWeight;
+        private Guna.UI2.WinForms.Guna2TextBox TextBoxWeight;
         private Guna.UI2.WinForms.Guna2TextBox TextBoxHeight;
         private Guna.UI2.WinForms.Guna2Panel guna2Panel9;
         private System.Windows.Forms.Label label16;
@@ -691,13 +722,14 @@
         private Guna.UI2.WinForms.Guna2Button guna2Button3;
         private Guna.UI2.WinForms.Guna2Button guna2Button2;
         private Guna.UI2.WinForms.Guna2Button guna2Button1;
-        private Guna.UI2.WinForms.Guna2CirclePictureBox guna2CirclePictureBox2;
+        private Guna.UI2.WinForms.Guna2CirclePictureBox PictureBoxAVATAR;
         private System.Windows.Forms.BindingSource goalBindingSource;
         private NutriPlan_ZdornikovaDataSetTableAdapters.GoalTableAdapter goalTableAdapter;
         private System.Windows.Forms.BindingSource activityLevelBindingSource;
         private NutriPlan_ZdornikovaDataSetTableAdapters.ActivityLevelTableAdapter activityLevelTableAdapter;
         private System.Windows.Forms.Label labelIMTSTATUS;
         private System.Windows.Forms.Label labelIMT;
-        private Guna.UI2.WinForms.Guna2PictureBox guna2PictureBox3;
+        private Guna.UI2.WinForms.Guna2PictureBox PictureBoxChange;
+        private Guna.UI2.WinForms.Guna2Button ButtonSave;
     }
 }

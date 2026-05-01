@@ -43,7 +43,7 @@ namespace NutriPlan_Zdornikova.AppForms
             // TODO: данная строка кода позволяет загрузить данные в таблицу "nutriPlan_ZdornikovaDataSet.Goal". При необходимости она может быть перемещена или удалена.
             this.goalTableAdapter.Fill(this.nutriPlan_ZdornikovaDataSet.Goal);
             // TODO: данная строка кода позволяет загрузить данные в таблицу "nutriPlan_ZdornikovaDataSet.UserProfiles". При необходимости она может быть перемещена или удалена.
-            this.userProfilesTableAdapter.Fill(this.nutriPlan_ZdornikovaDataSet.UserProfiles);
+            //this.userProfilesTableAdapter.Fill(this.nutriPlan_ZdornikovaDataSet.UserProfiles);
 
 
         }
@@ -297,6 +297,13 @@ namespace NutriPlan_Zdornikova.AppForms
         private void panel4Step_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        private void guna2Button1_Click(object sender, EventArgs e)
+        {
+            panel3Step.Visible = true;
+            panel4Step.Visible = false;
+            ProgressBar1.Value = 66;
         }
     }
 }
