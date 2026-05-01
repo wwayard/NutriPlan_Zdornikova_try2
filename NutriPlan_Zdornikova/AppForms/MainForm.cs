@@ -3,7 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlTypes;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,6 +19,7 @@ namespace NutriPlan_Zdornikova.AppForms
         public MainForm()
         {
             InitializeComponent();
+            LoadUserProfile();
         }
 
         private void label3_Click(object sender, EventArgs e)
@@ -27,32 +30,25 @@ namespace NutriPlan_Zdornikova.AppForms
 
         private void LoadUserProfile()
         {
-           
-        }
-        private string GetGoalName(int goalId)
-        {
-            switch (goalId)
-            {
-                case 1: return "Снижение веса";
-                case 2: return "Поддержание веса";
-                case 3: return "Набор массы";
-                default: return "Не указано";
-            }
-        }
+            if (Session.CurrentUser?.UserProfiles?.photo == null ||
+        Session.CurrentUser.UserProfiles.photo.Length == 0)
+                return;
 
-        private string GetActivityName(int activityId)
-        {
-            switch (activityId)
+            try
             {
-                case 1: return "Сидячий образ жизни";
-                case 2: return "Легкая активность";
-                case 3: return "Умеренная активность";
-                case 4: return "Высокая активность";
-                case 5: return "Очень высокая активность";
-                default: return "Не указано";
+                using (MemoryStream ms = new MemoryStream(Session.CurrentUser.UserProfiles.photo))
+                {
+                    PictureBoxPhotoPath.Image = Image.FromStream(ms);
+                    PictureBoxPhotoPath.SizeMode = PictureBoxSizeMode.StretchImage;
+                }
             }
-        }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка загрузки фото: {ex.Message}");
+            }
 
+        }
+       
         private void CalculateIMT(int weight, int heightCm)
         {
             double heightM = heightCm / 100.0;
@@ -115,30 +111,83 @@ namespace NutriPlan_Zdornikova.AppForms
             labelIMT.Text = bmi.ToString("F1");
 
         }
+        
 
-        private void labelUser_Click(object sender, EventArgs e)
+        private void PictureBoxPhotoPath_Click(object sender, EventArgs e)
         {
+            using (OpenFileDialog openFileDialog = new OpenFileDialog())
+            {
+                // Фильтр: показываем только картинки
+                openFileDialog.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.bmp;*.gif";
+                openFileDialog.Title = "Выберите фотографию профиля";
+
+                // Начальная папка (можно оставить пустой, тогда откроется последняя использованная)
+                // openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
+
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    try
+                    {
+                        // Путь к файлу, который выбрал пользователь (где бы он ни лежал)
+                        string sourceFilePath = openFileDialog.FileName;
+
+                        // Берем только имя файла (например, "photo.png")
+                        string fileName = Path.GetFileName(sourceFilePath);
+
+                        // Создаем уникальное имя, чтобы не перезаписать чужое фото
+                        // Формат: IDПользователя_ДатаВремя_ИмяФайла
+                        string uniqueFileName = $"{Session.CurrentUser.Id}_{DateTime.Now:yyyyMMdd_HHmmss}_{fileName}";
+
+                        // Определяем папку внутри проекта для хранения всех аватарок
+                        string appFolder = Application.StartupPath; // Папка, где лежит .exe файл
+                        string photosFolder = Path.Combine(appFolder, "UserPhotos");
+
+                        // Если папки нет, создаем её
+                        if (!Directory.Exists(photosFolder))
+                        {
+                            Directory.CreateDirectory(photosFolder);
+                        }
+
+                        // Полный путь, куда мы сохраним КОПИЮ файла
+                        string destinationFilePath = Path.Combine(photosFolder, uniqueFileName);
+
+                        // 2. КОПИРУЕМ файл из любой папки пользователя в нашу папку проекта
+                        File.Copy(sourceFilePath, destinationFilePath, true); // true = перезаписать, если вдруг есть
+
+                        // 3. Сохраняем ИМЯ файла в базу данных
+                        SavePhotoToDatabase(uniqueFileName);
+
+                        // 4. Показываем фото в PictureBox сразу же (берем из нашей папки)
+                        PictureBoxPhotoPath.Image = Image.FromFile(destinationFilePath);
+                        PictureBoxPhotoPath.SizeMode = PictureBoxSizeMode.StretchImage;
+
+                        MessageBox.Show("Аватарка успешно обновлена!", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"Ошибка при сохранении фото: {ex.Message}", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+        }
+        private void SavePhotoToDatabase(string photoFileName)
+        {
+            using (var context = new NutriPlanDB())
+            {
+                var profile = context.UserProfiles.Find(Session.CurrentUser.Id);
+
+                if (profile != null)
+                {
+                    // ВАЖНО: Убедитесь, что поле в БД называется PhotoPath (или как у вас)
+                    // И что оно типа NVARCHAR (строка), а не VARBINARY (байты).
+                    profile.photo = photoFileName;
+
+                    context.SaveChanges();
+
+                    // Обновляем данные в текущей сессии, чтобы они были актуальны
+                    Session.CurrentUser.UserProfiles = profile;
+                }
+            }
 
         }
-
-        private void label5_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label5_Click_1(object sender, EventArgs e)
-        {
-
-        }
-
-        private void ComboBoxGoal_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void guna2CircleProgressBar1_ValueChanged(object sender, EventArgs e)
-        {
-
-        }
-    }
 }

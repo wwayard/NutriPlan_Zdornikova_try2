@@ -8,7 +8,7 @@ namespace NutriPlan_Zdornikova.Models
     public partial class NutriPlanDB : DbContext
     {
         public NutriPlanDB()
-            : base("name=NutriPlanDB")
+            : base("name=NutriPlanDB1")
         {
         }
 
@@ -18,7 +18,6 @@ namespace NutriPlan_Zdornikova.Models
         public virtual DbSet<Gender> Gender { get; set; }
         public virtual DbSet<Goal> Goal { get; set; }
         public virtual DbSet<Role> Role { get; set; }
-        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<TypesMeal> TypesMeal { get; set; }
         public virtual DbSet<UserProfiles> UserProfiles { get; set; }
         public virtual DbSet<Users> Users { get; set; }
