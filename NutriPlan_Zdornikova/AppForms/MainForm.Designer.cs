@@ -37,9 +37,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.label2 = new System.Windows.Forms.Label();
-            this.guna2Button3 = new Guna.UI2.WinForms.Guna2Button();
-            this.guna2Button2 = new Guna.UI2.WinForms.Guna2Button();
-            this.guna2Button1 = new Guna.UI2.WinForms.Guna2Button();
             this.PictureBoxPhotoPath = new Guna.UI2.WinForms.Guna2PictureBox();
             this.PictureBoxAVATAR = new Guna.UI2.WinForms.Guna2CirclePictureBox();
             this.guna2Panel5 = new Guna.UI2.WinForms.Guna2Panel();
@@ -74,6 +71,8 @@
             this.goalTableAdapter = new NutriPlan_Zdornikova.NutriPlan_ZdornikovaDataSetTableAdapters.GoalTableAdapter();
             this.activityLevelTableAdapter = new NutriPlan_Zdornikova.NutriPlan_ZdornikovaDataSetTableAdapters.ActivityLevelTableAdapter();
             this.ButtonSave = new Guna.UI2.WinForms.Guna2Button();
+            this.ButtonAddEat = new Guna.UI2.WinForms.Guna2Button();
+            this.ButtonCalculate = new Guna.UI2.WinForms.Guna2Button();
             ((System.ComponentModel.ISupportInitialize)(this.nutriPlan_ZdornikovaDataSet)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.usersBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -154,9 +153,8 @@
             // 
             this.splitContainer1.Panel2.AutoScroll = true;
             this.splitContainer1.Panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.splitContainer1.Panel2.Controls.Add(this.guna2Button3);
-            this.splitContainer1.Panel2.Controls.Add(this.guna2Button2);
-            this.splitContainer1.Panel2.Controls.Add(this.guna2Button1);
+            this.splitContainer1.Panel2.Controls.Add(this.ButtonCalculate);
+            this.splitContainer1.Panel2.Controls.Add(this.ButtonAddEat);
             this.splitContainer1.Panel2.Controls.Add(this.PictureBoxPhotoPath);
             this.splitContainer1.Panel2.Controls.Add(this.PictureBoxAVATAR);
             this.splitContainer1.Panel2.Controls.Add(this.guna2Panel5);
@@ -175,48 +173,6 @@
             this.label2.Size = new System.Drawing.Size(49, 19);
             this.label2.TabIndex = 2;
             this.label2.Text = "label2";
-            // 
-            // guna2Button3
-            // 
-            this.guna2Button3.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.guna2Button3.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.guna2Button3.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.guna2Button3.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.guna2Button3.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.guna2Button3.ForeColor = System.Drawing.Color.White;
-            this.guna2Button3.Location = new System.Drawing.Point(1137, 238);
-            this.guna2Button3.Name = "guna2Button3";
-            this.guna2Button3.Size = new System.Drawing.Size(180, 45);
-            this.guna2Button3.TabIndex = 14;
-            this.guna2Button3.Text = "guna2Button1";
-            // 
-            // guna2Button2
-            // 
-            this.guna2Button2.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.guna2Button2.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.guna2Button2.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.guna2Button2.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.guna2Button2.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.guna2Button2.ForeColor = System.Drawing.Color.White;
-            this.guna2Button2.Location = new System.Drawing.Point(1137, 156);
-            this.guna2Button2.Name = "guna2Button2";
-            this.guna2Button2.Size = new System.Drawing.Size(180, 45);
-            this.guna2Button2.TabIndex = 14;
-            this.guna2Button2.Text = "guna2Button1";
-            // 
-            // guna2Button1
-            // 
-            this.guna2Button1.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
-            this.guna2Button1.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
-            this.guna2Button1.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
-            this.guna2Button1.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
-            this.guna2Button1.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.guna2Button1.ForeColor = System.Drawing.Color.White;
-            this.guna2Button1.Location = new System.Drawing.Point(1137, 85);
-            this.guna2Button1.Name = "guna2Button1";
-            this.guna2Button1.Size = new System.Drawing.Size(180, 45);
-            this.guna2Button1.TabIndex = 14;
-            this.guna2Button1.Text = "guna2Button1";
             // 
             // PictureBoxPhotoPath
             // 
@@ -637,6 +593,50 @@
             this.ButtonSave.Visible = false;
             this.ButtonSave.Click += new System.EventHandler(this.ButtonSave_Click);
             // 
+            // ButtonAddEat
+            // 
+            this.ButtonAddEat.Animated = true;
+            this.ButtonAddEat.AnimatedGIF = true;
+            this.ButtonAddEat.AutoRoundedCorners = true;
+            this.ButtonAddEat.BackColor = System.Drawing.Color.Transparent;
+            this.ButtonAddEat.BorderRadius = 22;
+            this.ButtonAddEat.BorderStyle = System.Drawing.Drawing2D.DashStyle.DashDotDot;
+            this.ButtonAddEat.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.ButtonAddEat.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.ButtonAddEat.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.ButtonAddEat.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.ButtonAddEat.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.ButtonAddEat.FillColor = System.Drawing.Color.MistyRose;
+            this.ButtonAddEat.Font = new System.Drawing.Font("Candara Light", 12F);
+            this.ButtonAddEat.ForeColor = System.Drawing.Color.Black;
+            this.ButtonAddEat.Location = new System.Drawing.Point(1132, 102);
+            this.ButtonAddEat.Name = "ButtonAddEat";
+            this.ButtonAddEat.Size = new System.Drawing.Size(173, 46);
+            this.ButtonAddEat.TabIndex = 16;
+            this.ButtonAddEat.Text = "Добавление приема пищи на сегодня ";
+            // 
+            // ButtonCalculate
+            // 
+            this.ButtonCalculate.Animated = true;
+            this.ButtonCalculate.AnimatedGIF = true;
+            this.ButtonCalculate.AutoRoundedCorners = true;
+            this.ButtonCalculate.BackColor = System.Drawing.Color.Transparent;
+            this.ButtonCalculate.BorderRadius = 22;
+            this.ButtonCalculate.BorderStyle = System.Drawing.Drawing2D.DashStyle.DashDotDot;
+            this.ButtonCalculate.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.ButtonCalculate.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
+            this.ButtonCalculate.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
+            this.ButtonCalculate.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
+            this.ButtonCalculate.DisabledState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(141)))), ((int)(((byte)(141)))), ((int)(((byte)(141)))));
+            this.ButtonCalculate.FillColor = System.Drawing.Color.MistyRose;
+            this.ButtonCalculate.Font = new System.Drawing.Font("Candara Light", 12F);
+            this.ButtonCalculate.ForeColor = System.Drawing.Color.Black;
+            this.ButtonCalculate.Location = new System.Drawing.Point(1132, 191);
+            this.ButtonCalculate.Name = "ButtonCalculate";
+            this.ButtonCalculate.Size = new System.Drawing.Size(173, 46);
+            this.ButtonCalculate.TabIndex = 16;
+            this.ButtonCalculate.Text = "Калькулятор калорий ";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -719,9 +719,6 @@
         private Guna.UI2.WinForms.Guna2CirclePictureBox guna2CirclePictureBox1;
         private Guna.UI2.WinForms.Guna2PictureBox guna2PictureBox1;
         private Guna.UI2.WinForms.Guna2PictureBox PictureBoxPhotoPath;
-        private Guna.UI2.WinForms.Guna2Button guna2Button3;
-        private Guna.UI2.WinForms.Guna2Button guna2Button2;
-        private Guna.UI2.WinForms.Guna2Button guna2Button1;
         private Guna.UI2.WinForms.Guna2CirclePictureBox PictureBoxAVATAR;
         private System.Windows.Forms.BindingSource goalBindingSource;
         private NutriPlan_ZdornikovaDataSetTableAdapters.GoalTableAdapter goalTableAdapter;
@@ -731,5 +728,7 @@
         private System.Windows.Forms.Label labelIMT;
         private Guna.UI2.WinForms.Guna2PictureBox PictureBoxChange;
         private Guna.UI2.WinForms.Guna2Button ButtonSave;
+        private Guna.UI2.WinForms.Guna2Button ButtonAddEat;
+        private Guna.UI2.WinForms.Guna2Button ButtonCalculate;
     }
 }

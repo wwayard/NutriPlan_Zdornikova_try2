@@ -68,6 +68,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AppForms\FormAddEat.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AppForms\FormAddEat.Designer.cs">
+      <DependentUpon>FormAddEat.cs</DependentUpon>
+    </Compile>
     <Compile Include="AppForms\FormAnketa.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -111,6 +117,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="AppForms\FormAddEat.resx">
+      <DependentUpon>FormAddEat.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="AppForms\FormAnketa.resx">
       <DependentUpon>FormAnketa.cs</DependentUpon>
     </EmbeddedResource>
