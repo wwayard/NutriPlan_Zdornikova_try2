@@ -47,6 +47,96 @@ namespace NutriPlan_Zdornikova.AppForms
 
 
         }
+        private void CalculateAndDisplayCalories()
+        {
+            // 1. Получаем данные из полей формы
+            int weight = TrackBarWeight.Value; // кг
+            int height = TrackBarHeigh.Value;  // см
+            int age = DateTime.Now.Year - DateTimePickerOfBirdthay.Value.Year; // Примерный возраст
+
+            // Корректировка возраста, если день рождения еще не наступил в этом году
+            if (DateTime.Now.DayOfYear < DateTimePickerOfBirdthay.Value.DayOfYear)
+                age--;
+
+            int genderId = SelectedGenderId; // 1 - Мужской, 2 - Женский (проверьте ваши ID)
+
+            // Получаем ID активности и цели из ComboBox
+            // Важно: убедитесь, что SelectedValue не null
+            if (ActivityLevelComboBox2.SelectedValue == null || GoalComboBox1.SelectedValue == null)
+                return;
+
+            int activityId = (int)ActivityLevelComboBox2.SelectedValue;
+            int goalId = (int)GoalComboBox1.SelectedValue;
+
+            // 2. Расчет Базового Обмена Веществ (BMR) по формуле Миффлина-Сан Жеора
+            double bmr;
+            if (genderId == 1) // Мужчина
+            {
+                bmr = (10 * weight) + (6.25 * height) - (5 * age) + 5;
+            }
+            else // Женщина
+            {
+                bmr = (10 * weight) + (6.25 * height) - (5 * age) - 161;
+            }
+
+            // 3. Коэффициент физической активности
+            double activityMultiplier = 1.2; // По умолчанию сидячий образ жизни
+
+            switch (activityId)
+            {
+                case 1: activityMultiplier = 1.2; break; // Сидячий
+                case 2: activityMultiplier = 1.375; break; // Легкая активность (1-3 раза в неделю)
+                case 3: activityMultiplier = 1.55; break; // Средняя (3-5 раз)
+                case 4: activityMultiplier = 1.725; break; // Высокая (6-7 раз)
+                case 5: activityMultiplier = 1.9; break; // Экстремальная
+            }
+
+            // 4. Расчет нормы поддержания веса (TDEE)
+            double maintenanceCalories = bmr * activityMultiplier;
+
+            // 5. Корректировка под цель
+            double finalCalories = maintenanceCalories;
+            string goalText = "";
+
+            switch (goalId)
+            {
+                case 1: // Похудение
+                    finalCalories = maintenanceCalories * 0.85; // Дефицит 15%
+                    goalText = "для похудения";
+                    break;
+                case 2: // Поддержание
+                    finalCalories = maintenanceCalories;
+                    goalText = "для поддержания веса";
+                    break;
+                case 3: // Набор массы
+                    finalCalories = maintenanceCalories * 1.15; // Профицит 15%
+                    goalText = "для набора массы";
+                    break;
+            }
+
+            // Округляем до целого
+            int resultCalories = (int)Math.Round(finalCalories);
+
+            // 6. Вывод результата на финальный экран
+            // Предположим, у вас есть Label для вывода рекомендации, например labelRecommendedCalories
+            labelSovet.Text = $"{resultCalories} ккал/день";
+
+            // Можно также вывести пояснение
+            labelAdvace.Text = $"Ваша суточная норма {goalText}: {resultCalories} ккал.\n" +
+                               $"Базовый обмен (BMR): {(int)bmr} ккал.\n" +
+                               $"С учетом активности: {(int)maintenanceCalories} ккал.";
+
+            if(resultCalories < CaloriesTrackBar1.Minimum)
+                 resultCalories = CaloriesTrackBar1.Minimum;
+
+            if (resultCalories > CaloriesTrackBar1.Maximum)
+                resultCalories = CaloriesTrackBar1.Maximum;
+
+            // 7. Автоматически устанавливаем это значение в TrackBar калорий, 
+            // чтобы пользователь мог его сохранить в анкету
+            CaloriesTrackBar1.Value = resultCalories;
+            labelCount.Text = $"{resultCalories} ккал/день"; // Обновляем подпись под трекбаром
+        }
 
 
         private void buttonMale_Click(object sender, EventArgs e)
@@ -225,7 +315,7 @@ namespace NutriPlan_Zdornikova.AppForms
         private void ButtonNext3_Click(object sender, EventArgs e)
         {
             CalulateResults();
-
+            CalculateAndDisplayCalories();
             // 2. Скрываем предыдущую панель
             panel3Step.Visible = false;
             ProgressBar1.Value = 100;
