@@ -102,6 +102,7 @@
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.CaloriesToolTip = new Guna.UI2.WinForms.Guna2HtmlToolTip();
             this.guna2Transition1 = new Guna.UI2.WinForms.Guna2Transition();
+            this.labelAdvace = new System.Windows.Forms.Label();
             fullNameLabel = new System.Windows.Forms.Label();
             label1 = new System.Windows.Forms.Label();
             label2 = new System.Windows.Forms.Label();
@@ -291,6 +292,7 @@
             // guna2ShadowPanel3
             // 
             this.guna2ShadowPanel3.BackColor = System.Drawing.Color.Transparent;
+            this.guna2ShadowPanel3.Controls.Add(this.labelAdvace);
             this.guna2ShadowPanel3.Controls.Add(this.labelSovet);
             this.guna2ShadowPanel3.Controls.Add(this.guna2PictureBox4);
             this.guna2ShadowPanel3.Controls.Add(this.label13);
@@ -308,9 +310,9 @@
             // 
             this.guna2Transition1.SetDecoration(this.labelSovet, Guna.UI2.AnimatorNS.DecorationType.None);
             this.labelSovet.Font = new System.Drawing.Font("Candara", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.labelSovet.Location = new System.Drawing.Point(29, 107);
+            this.labelSovet.Location = new System.Drawing.Point(24, 85);
             this.labelSovet.Name = "labelSovet";
-            this.labelSovet.Size = new System.Drawing.Size(196, 192);
+            this.labelSovet.Size = new System.Drawing.Size(202, 55);
             this.labelSovet.TabIndex = 8;
             this.labelSovet.Text = "Белки";
             this.labelSovet.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -334,11 +336,11 @@
             // 
             this.guna2Transition1.SetDecoration(this.label13, Guna.UI2.AnimatorNS.DecorationType.None);
             this.label13.Font = new System.Drawing.Font("Candara", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label13.Location = new System.Drawing.Point(-4, 0);
+            this.label13.Location = new System.Drawing.Point(-7, 0);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(266, 46);
             this.label13.TabIndex = 3;
-            this.label13.Text = "Главный совет";
+            this.label13.Text = "Суточная норма калорий";
             this.label13.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // guna2ShadowPanel2
@@ -644,7 +646,7 @@
             this.guna2Button1.Name = "guna2Button1";
             this.guna2Button1.Size = new System.Drawing.Size(201, 37);
             this.guna2Button1.TabIndex = 20;
-            this.guna2Button1.Text = " ";
+            this.guna2Button1.Text = " Назад";
             this.guna2Button1.Click += new System.EventHandler(this.guna2Button1_Click);
             // 
             // ButtonFinish
@@ -1108,6 +1110,17 @@
             animation2.TransparencyCoeff = 1F;
             this.guna2Transition1.DefaultAnimation = animation2;
             // 
+            // labelAdvace
+            // 
+            this.guna2Transition1.SetDecoration(this.labelAdvace, Guna.UI2.AnimatorNS.DecorationType.None);
+            this.labelAdvace.Font = new System.Drawing.Font("Candara", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.labelAdvace.Location = new System.Drawing.Point(24, 160);
+            this.labelAdvace.Name = "labelAdvace";
+            this.labelAdvace.Size = new System.Drawing.Size(202, 161);
+            this.labelAdvace.TabIndex = 8;
+            this.labelAdvace.Text = "Белки";
+            this.labelAdvace.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // FormAnketa
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1219,5 +1232,6 @@
         private Guna.UI2.WinForms.Guna2PictureBox guna2PictureBox4;
         private System.Windows.Forms.Label label13;
         private Guna.UI2.WinForms.Guna2Transition guna2Transition1;
+        private System.Windows.Forms.Label labelAdvace;
     }
 }

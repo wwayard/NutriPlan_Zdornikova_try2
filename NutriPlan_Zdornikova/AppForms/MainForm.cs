@@ -283,6 +283,11 @@ namespace NutriPlan_Zdornikova.AppForms
             PictureBoxChange.Visible = true;       // Показываем карандаш
             ButtonSave.Visible = false;   // Скрываем кнопку сохранить
         }
+
+        private void label10_Click(object sender, EventArgs e)
+        {
+
+        }
     }
     }
     
